@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0; background-color:rgb(255, 255, 255)">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="./lib/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="./data/2022城乡收入.js"></script>
+
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+
+    var option_pie;
+    var dataRange = [50, 60, 65, 70, 85];
+
+
+    //-----function-------
+    function addEchart(center, data) {
+      return {
+        type: 'pie',
+        radius: ['6%', '10%'],
+        coordinateSystem: 'geo',
+        tooltip: {
+          formatter: '{b}: {c} ({d}%)'
+        },
+        label: {
+          show: false
+        },
+        labelLine: {
+          show: false
+        },
+
+        itemStyle: {
+          normal: {
+            borderColor: 'rgba(255, 255, 255, 0.5)',//图形的描边颜
+            areaColor: '#BCAF9A', // 设置面积颜色
+            shadowOffsetX: 2, // 阴影水平偏移
+            shadowOffsetY: 1, // 阴影垂直偏移
+            shadowBlur: 20, // 阴影模糊大小
+            shadowColor: 'rgba(0, 0, 0, 0.3)' // 阴影颜色
+          },
+          emphasis: {
+            areaColor: '#BCAF9A', // 设置面积颜色
+            shadowOffsetX: 2, // 阴影水平偏移
+            shadowOffsetY: 1, // 阴影垂直偏移
+            shadowBlur: 30, // 阴影模糊大小（加深）
+            shadowColor: 'rgba(0, 0, 0, 0.5)' // 阴影颜色（加深）
+
+          }
+        },
+        animationDuration: 0.5,
+        center,
+        data
+      };
+    }
+
+    $.get('https://geo.datav.aliyun.com/areas_v3/bound/330000_full.json', function (ZJjson) {
+      echarts.registerMap('ZJ', ZJjson);
+
+      //环状图
+      option_pie = {
+        title: {
+          text: '2022年城乡统筹发展',
+          top: "10%",
+          itemGap: 4,
+          left: "20%",
+          textAlign: 'left',
+          textStyle: {
+            //文字颜色
+            color: '#000',
+            //字体风格,'normal','italic','oblique'
+            fontStyle: 'normal',
+            //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+            fontWeight: 'bold',
+            //字体系列
+            fontFamily: 'STZhongsong',
+            //字体大小
+            fontSize: 25,
+          },
+          subtext: '数据来源：浙江省统计局',
+          subtextStyle: {
+            //文字颜色
+            color: '#000',
+            //字体风格,'normal','italic','oblique'
+            fontStyle: 'normal',
+            //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+            fontWeight: 'normal',
+            //字体系列
+            fontFamily: 'STKaiTi',
+            //字体大小
+            fontSize: 17,
+          },
+          sublink: 'https://tjj.zj.gov.cn/col/col1525563/index.html'
+        },
+        visualMap: {
+          show: true,
+          type: 'piecewise',
+          // <<<<<<<<<<<<--------这里调整底图的设色---------->>>>>>>>>>>>>>>
+          pieces: [
+            { lt: 1.58, label: '< 1.58', color: '#FEFEFE' },
+            { gte: 1.58, lt: 1.72, label: '1.58~1.72', color: '#EDEEEE' },
+            { gte: 1.72, lt: 1.92, label: '1.72~1.92', color: '#C8C8C9' },
+            { gte: 1.92, lt: 2.10, label: '1.92~2.10', color: '#B4B5B5' },
+            { gte: 2.10, lt: 2.33, label: '2.10~2.33', color: '#9E9F9F' },
+            { gte: 2.33, lt: 2.50, label: '2.33~2.50', color: '#888888' },
+            { gte: 2.50, lt: 3.16, label: '2.50~3.16', color: '#717070' },
+            { gte: 3.16, label: '≥ 3.16', color: '#595757' }
+          ],
+          seriesIndex: 0,
+          left:"20%",
+          bottom:"4%",
+        },
+        geo: {
+          map: 'ZJ',
+          roam: true,//是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+          label: {
+            normal: {
+              show: true,
+              fontSize: '15',
+              fontFamily: 'STZhongsong',
+              fontStyle: '#474443',
+              color: 'rgba(0,0,0,0.9)'
+            }
+          },
+          itemStyle: {
+            normal: {
+              borderColor: 'rgba(0, 0, 0, 0.2)'//图形的描边颜
+            },
+            emphasis: {
+              areaColor: '#62C3D0',
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              shadowBlur: 20,
+              borderWidth: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        },
+        tooltip: {},
+        legend: {
+          type: 'scroll',
+          orient: 'vertical',
+          left: '20%',
+          top: 'center',
+          textStyle: {
+            color: 'rgba(0,0,0,0.9)'
+          },
+          formatter: function (name) {
+            return name + '  ';
+          },
+          tooltip: {
+            show: true
+          }
+        },
+        //------------图表-------------
+        series: [{
+          name: "城乡收入对比",
+          type: 'map',
+          map: 'ZJ',
+          projection: {
+            project: function (point) {
+              return projection(point);
+            },
+            unproject: function (point) {
+              return projection.invert(point);
+            }
+          },
+          geoIndex: 0,
+          itemSytle: {
+            emphasis: { label: { show: false } }
+          },
+          label: {
+            normal: {
+              show: false
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#BCAF9A',
+            }
+          },
+          itemStyle: {
+            areaColor: 'white',
+            borderColor: '#817065',
+          },
+          selectedMode: false,
+          data: [
+            { name: '湖州市', value: 1.61 },
+            { name: '嘉兴市', value: 1.56 },
+            { name: '舟山市', value: 1.57 },
+            { name: '杭州市', value: 1.71 },
+            { name: '绍兴市', value: 1.67 },
+            { name: '宁波市', value: 1.69 },
+            { name: '衢州市', value: 1.83 },
+            { name: '金华市', value: 1.95 },
+            { name: '台州市', value: 1.88 },
+            { name: '温州市', value: 1.91 },
+            { name: '丽水市', value: 1.96 }
+          ]
+        },
+        addEchart([122.146805, 30.056563], compare2022['zhoushan']),
+        addEchart([120.783487, 30.620063], compare2022['jiaxing']),
+        addEchart([121.479174, 29.733017], compare2022['ningbo']),
+        addEchart([120.640933, 29.732893], compare2022['shaoxing']),
+        addEchart([119.476498, 29.898918], compare2022['hangzhou']),
+        addEchart([119.873663, 30.743058], compare2022['huzhou']),
+        addEchart([121.136679, 28.757098], compare2022['taizhou']),
+        addEchart([120.463912, 27.894726], compare2022['wenzhou']),
+        addEchart([119.517145, 28.197644], compare2022['lishui']),
+        addEchart([118.679569, 28.932446], compare2022['quzhou']),
+        addEchart([119.957007, 29.115117], compare2022['jinhua']),
+        ]
+      };
+
+
+      myChart.setOption(option_pie, false, true);
+
+    });
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>
