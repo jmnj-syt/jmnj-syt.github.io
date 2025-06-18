@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>浙江产业结构图交互</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('3.png') no-repeat center center fixed;
+      background-size: contain;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .clickable {
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    /* 弹窗样式 */
+    .modal {
+      position: fixed;
+      top: 20%;
+      right: 2%;
+      width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border: 2px solid #666;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0005;
+      display: none;
+      z-index: 1000;
+    }
+
+    .modal h3 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 模拟点击区域（位置需根据图像调整） -->
+<div class="clickable" style="top: 60%; left: 62%; width: 5%; height: 8%;" onclick="showModal('金融业', '金融业在浙江省占GDP的8.80%，对资本流动和产业升级起着关键支撑作用。')"></div>
+<div class="clickable" style="top: 48%; left: 68%; width: 5%; height: 8%;" onclick="showModal('批发和零售业', '批发和零售业占GDP的12.50%，是浙江活跃市场经济的重要支柱。')"></div>
+<div class="clickable" style="top: 70%; left: 68%; width: 5%; height: 8%;" onclick="showModal('房地产业', '房地产业占GDP的6.30%，支撑城市发展与居民住房需求。')"></div>
+<div class="clickable" style="top: 60%; left: 72%; width: 5%; height: 8%;" onclick="showModal('其他服务业', '其他服务业贡献达23.20%，涵盖信息服务、文化创意等多个新兴领域。')"></div>
+<div class="clickable" style="top: 45%; left: 65%; width: 5%; height: 8%;" onclick="showModal('交通运输、仓储和邮政业', '该行业占比3.40%，是浙江物流体系的重要组成。')"></div>
+<div class="clickable" style="top: 65%; left: 60%; width: 5%; height: 8%;" onclick="showModal('住宿和餐饮业', '住宿和餐饮业占1.90%，在推动旅游与城市活力方面发挥作用。')"></div>
+
+<!-- 弹窗 -->
+<div id="infoModal" class="modal">
+  <span class="close-btn" onclick="hideModal()">×</span>
+  <h3 id="modalTitle"></h3>
+  <p id="modalContent"></p>
+</div>
+
+<script>
+  function showModal(title, content) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalContent').innerText = content;
+    document.getElementById('infoModal').style.display = 'block';
+  }
+
+  function hideModal() {
+    document.getElementById('infoModal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
