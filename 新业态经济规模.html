@@ -1,0 +1,79 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-stack&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcyGOAHmAQOSCatoPo2gOYqCK5oA2mgWHKCABoPN-gcraAjkYIRWsACgBMABiEBmAJTlYAXwA0adBmDAskEASQYAThADm-nDooBDYhADO5ebHNWACsAjQwxrRgCeIfLHKWAC1MAE2AAdxlZOUVlWFwjaGCPYNMwUwIAbXJAFz1AcrlAHgUBQH65QGFFaVtyQDI9QAqlQEYdZgFAcDlALrlpAF1opXRiAEELSy0u5TBvX3IAY1ScfWAdTxsh9BS0zPJAQzl6QFHTQA47Gz8GQFZXQDFVPfJABldAW7VAH79ACBVAZXlT2lzAQZVAAqVAU91yNqGFIc8-qyZbQjHwUABupiwAFccHtoKYALZjAqRWzA0bgyEwuGIsb1SJtGLKSzGCA4AawDKLZDU9DwpEUPKFUrlWleUF-ABGph0C1isW5OgA4qZNLARET-bBlulKQA2AAcEtgABZRLZxABGZUAVh1IkJbIgbgRAGURrgPOM1LMKABiACcmoAws6AOw6yLU35S1BSum4ig1epNVp8_0gsaC8NSmWZTXq2AKnW2FUp2BuhWG_2wY04M0W3zaa1YW1-O0AMR6zuTCq9UtkQ2-sgA3EA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: { text: '浙江农村新业态经济规模 (2023)' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: { data: ['年产值(亿元)', '带动就业(万人)'] },
+    xAxis: {
+      type: 'category',
+      data: ['乡村旅游', '农村电商', '田园综合体', '农产品加工']
+    },
+    yAxis: [{ type: 'value', name: '产值' }, { type: 'value', name: '就业' }],
+    series: [
+      {
+        name: '年产值(亿元)',
+        type: 'bar',
+        barGap: 0,
+        data: [680, 420, 310, 550],
+        itemStyle: { color: '#91CC75' }
+      },
+      {
+        name: '带动就业(万人)',
+        type: 'bar',
+        data: [120, 85, 45, 78],
+        itemStyle: { color: '#FAC858' }
+      }
+    ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
