@@ -1,0 +1,114 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=sankey-simple&code=PYBwLglsB2AEC8sDeBYAULWkwBsCmAXMuppmHgB5hEDkATAAx12AueoDmKgiDaD3yoPSmgsomA2U0CmioAtFQL9qgWSVAgsqA59UBAejQA0JUvgBm1WDQDGeaOQBONFQF9lGLMGA5IIIqgtkDEAOYu8B2hHIBbJSqdXdwMAeWgCGh9gAFcAZzwogDc8YwszFRdnABN7ANh1TRoARgYAUiVMAHpK2EAz3UBO-MBd2MAuOUBO7UALNUBe7UAyvUAQt1gS0rznFwALQsGK6thAZ-Umtq6-gbK87RgwAEMIaAAZDYAjPBwiMANovFhpwFBlQGoVQHALQD9vU3NMeOc8WKIAbTyHUlIwABPECEGixDbQADWeEB_kcqg2gJihWgMBSL3-lxqtUA5fKAIKDAJ0OgAh_-SASH_ADEqM3xxMAgO6AX7lSYAHU0AdsaAGH_AJDGgD-1QC0coA-M0AXJ6AYBjAC6meUwWQ2m2-YtISFg0A2PkIWkAkGqAF0UFLAzMh5YrlTRAPhBgEcdTXauUKpW0QCzfhqaFrFLAZZhzXraIBA7UARzamh0uy1aQC25oA93W9Oot-sAOHKAPOCQ07Q66tIA1O2DdrNur9NEA80HJ-1x9Pck0ph2x336wAHpoBCVJDJdogH89cOF3P6wD6NhmG9WtIBNWybKZlAF0Mf9piLAH8pgFLjQDOioBvn1ZgE_tQApejzAIoWgC_1Tm9QCCtoBEFRlOG2kM-sB-8P-xdgsRiBl0tGNCgdmwM7kKXYqiQ2OHORCK9tjp_P0Uv-o2reWAbA-eBPt2Dqvu-ypfukx6ymeF5XlonrAfej60M-UFvh-AzfghzpIf-KE0EG6GgZhnaQbA0F4XBA6YnKf4AbQUYUWBhR1i-uGwQRmKISxpFJhxVE0NhtG8Z-_ECTqQn6lmongbQLY8TB0nwbJcnIfq-ZKVx9Y4ep-GabJzE6bQFb6SprZGfRWp9oxmAJCAowbLEEAHn8slqMA2hxLQGxZAAVhsujQNosIyqZg41IAORmAE5BIqsoAhFaAPtGPKAAh2gAbyoAgAwJYAlvqALQmfCslwgCcFsygB52oAommAADpgBCNoAdfqCjlgBDyoyO7bHgADKQL4LkhGwGsODAJ4WiZEFEB6GAcJaf5BjJNAHwHgwAB0ACsTmkNMgCb8YAM4mAFgJgDj8YljKACN-rKAJXRgCwcoAMCpboA_X6AIbmgASKoADc6AN4-gA88jyvSFbGI1jQeR5aZgNAAMQAGIbQAwgAggAIkUFSQ1DSMAGwABwAJyo9DWMAEIbRjADMFSxuD0OkzjWMY4j-MAKJYwA7IzbNM3QGPwzj5NFkNVOIzjcPw3zWgQ7DiMbXQhMMPjhNQwALDjhMM7GvbRdtOAHEcg3zdYY20BDpMm3NPnrD1EAAF6wXQ0V5CYKga2gJgANxAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '2022年农民可支配收入全国前十城市',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item',
+    triggerOn:'mousemove'
+  },
+  grid: {
+    left: '10%',  // 左边距为容器宽度的 10%
+    right: '10%', // 右边距为容器宽度的 10%
+    containLabel: true // 包含标签
+  },
+  series: [
+    {
+      type:'sankey',
+      layout: 'none',
+      // 左侧节点（城市）和右侧节点（省份）数据，按图中显示调整
+      data: [
+        { name: '嘉兴市' }, { name: '舟山市' }, { name: '绍兴市' }, 
+        { name: '宁波市' }, { name: '杭州市' }, { name: '东莞市' }, 
+        { name: '湖州市' }, { name: '苏州市' }, { name: '中山市' }, 
+        { name: '无锡市' }, { name: '广东' }, { name: '江苏' }, { name: '浙江' }
+      ],
+      // 调整链接关系，对应图中桑基图的流向
+      links: [
+        
+        { source: '舟山市', target: '浙江', value: 1 },
+        
+        { source: '绍兴市', target: '浙江', value: 1 },
+        { source: '宁波市', target: '浙江', value: 1 },
+        { source: '杭州市', target: '浙江', value: 1 },
+        { source: '东莞市', target: '广东', value: 1 },
+        { source: '湖州市', target: '浙江', value: 1 },
+        { source: '苏州市', target: '江苏', value: 1 },
+        { source: '中山市', target: '广东', value: 1 },
+        { source: '无锡市', target: '江苏', value: 1 }
+      ],
+      emphasis: {
+        focus: 'adjacency'
+      },
+      // 颜色调整，模拟图中渐变、色彩搭配，可根据实际需求微调渐变参数
+      lineStyle: {
+        color: 'gradient',
+        curveness: 0.5,
+        // 这里通过颜色数组，让不同流向线条呈现类似图中的色彩
+        colors: [
+          '#F5CAD1', '#FAD689', '#F8B563', 
+          '#F3986D', '#E87E7E', '#E26A93', 
+          '#D95CA3', '#CD52B0', '#BF49BD'
+        ]
+      },
+      label: {
+        color: '#333',
+        fontSize: 12
+      }
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
