@@ -43,34 +43,37 @@
     
     var option;
 
-    option = {
- title: { text: '浙江农村生态治理成效对比' },
-    tooltip: { trigger: 'axis' },
-    legend: { data: ['治理率', '补偿金额'] },
-    xAxis: {
-      type: 'category',
-      data: ['生活垃圾处理', '污水治理', '卫生厕所', '生态补偿']
-    },
-    yAxis: [
-      { type: 'value', name: '治理率(%)', max: 100 },
-      { type: 'value', name: '金额(亿元)' }
-    ],
-    series: [
-      {
-        name: '治理率',
-        type: 'bar',
-        data: [76, 56, 99, 80],
-        itemStyle: { color: '#91CC75' }
-      },
-      {
-        name: '补偿金额',
-        type: 'line',
-        yAxisIndex: 1,
-        data: [12, 18, 20, 24],
-        lineStyle: { width: 4, color: '#5470C6' },
-        symbol: 'diamond'
-      }
+   option = {
+  title: { text: '浙江农村生态治理成效对比' },
+  tooltip: { trigger: 'axis' },
+  legend: { data: ['治理率', '补偿金额'] },
+  xAxis: {
+    type: 'category',
+    data: [
+      '生活垃圾处理', '污水治理', '卫生厕所', '生态补偿',
+      '农村绿化', '河道整治', '饮水安全', '农田基础设施'
     ]
+  },
+  yAxis: [
+    { type: 'value', name: '治理率(%)', max: 100 },
+    { type: 'value', name: '金额(亿元)' }
+  ],
+  series: [
+    {
+      name: '治理率',
+      type: 'bar',
+      data: [76, 56, 99, 80, 85, 72, 90, 88],
+      itemStyle: { color: '#3498D8' }
+    },
+    {
+      name: '补偿金额',
+      type: 'line',
+      yAxisIndex: 1,
+      data: [12, 18, 20, 24, 16, 19, 21, 22],
+      lineStyle: { width: 4, color: '#FAC858' },
+      symbol: 'diamond'
+    }
+  ]
 };
 
     if (option && typeof option === 'object') {
